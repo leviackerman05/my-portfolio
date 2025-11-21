@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from './Header';
-import Navbar from './Navbar';
 import Footer from './Footer';
 
 interface LayoutProps {
@@ -9,10 +7,8 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-black text-gray-800 dark:text-white">
-      <Header />
-      <Navbar />
-      <main className="max-w-6xl mx-auto px-4 py-8">
+    <div className="min-h-screen bg-primary text-secondary font-sans selection:bg-accent selection:text-white">
+      <main className="min-h-screen">
         {children}
       </main>
       <Footer />

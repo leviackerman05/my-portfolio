@@ -1,30 +1,23 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import Layout from './components/Layout';
-import Home from './pages/home';
-import About from './pages/about';
-import Blog from './pages/blog';
-import FullBlogPost from './components/FullBlogPost';
-import Projects from './pages/project';
-import usePageTitle from './hooks/usePageTitle';
+import { useLocation, BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import Layout from "./components/Layout";
+import Home from "./pages/home";
 
-const PageTitle: React.FC = () => {
+function PageTitle({ title }: { title: string }) {
   const location = useLocation();
-  usePageTitle(location.pathname, 'Priyansh');
+  useEffect(() => {
+    document.title = title;
+  }, [location, title]);
   return null;
-};
+}
 
-const App: React.FC = () => {
+function App() {
   return (
     <Router>
-      <PageTitle />
       <Layout>
+        <PageTitle title="Portfolio" />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:id" element={<FullBlogPost />} />
-          <Route path="/projects" element={<Projects />} />
         </Routes>
       </Layout>
     </Router>
