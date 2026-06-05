@@ -2,16 +2,481 @@
 @tailwind components;
 @tailwind utilities;
 
+:root,
+.dark {
+  --bg: #0c0a09;
+  --surface: #1c1917;
+  --border: #292524;
+  --text: #fafaf9;
+  --muted: #a8a29e;
+  --glass-bg: rgba(28, 25, 23, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-rail-hover: rgba(255, 255, 255, 0.08);
+  --glass-rail-selected: rgba(255, 255, 255, 0.12);
+  --glass-rail-divider: rgba(255, 255, 255, 0.06);
+  --dot-primary: rgba(255, 255, 255, 0.08);
+  --dot-secondary: rgba(249, 115, 22, 0.06);
+}
+
+.light {
+  --bg: #faf8f5;
+  --surface: #ffffff;
+  --border: #e7e5e4;
+  --text: #1c1917;
+  --muted: #78716c;
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-rail-hover: rgba(0, 0, 0, 0.06);
+  --glass-rail-selected: rgba(0, 0, 0, 0.08);
+  --glass-rail-divider: rgba(0, 0, 0, 0.08);
+  --dot-primary: rgba(0, 0, 0, 0.12);
+  --dot-secondary: rgba(0, 0, 0, 0.06);
+}
+
 @layer base {
-  body {
-    @apply bg-primary text-secondary font-sans antialiased;
+  html {
+    scroll-behavior: smooth;
   }
-  
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: Inter, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    font-family: "Space Grotesk", sans-serif;
   }
 
   ::selection {
-    @apply bg-accent text-white;
+    background-color: #f97316;
+    color: #ffffff;
+  }
+}
+
+@layer components {
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .glass-rail {
+    --rail-icon-col: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    padding: 0.375rem 0.25rem;
+    overflow: hidden;
+  }
+
+  .dark .glass-rail,
+  :root.dark .glass-rail {
+    background: linear-gradient(
+      165deg,
+      #101010 0%,
+      #141414 50%,
+      #181818 100%
+    );
+  }
+
+  .light .glass-rail {
+    background: linear-gradient(
+      165deg,
+      #f0f0f0 0%,
+      #e4e4e4 50%,
+      #d8d8d8 100%
+    );
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .glass-rail-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-block: 0.375rem;
+    padding-inline: 0;
+    border-radius: 0.625rem;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .glass-rail-icon-slot {
+    width: var(--rail-icon-col);
+    min-width: var(--rail-icon-col);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .glass-rail-label {
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 0;
+    opacity: 0;
+    transition: max-width 0.25s ease, opacity 0.2s ease;
+  }
+
+  .glass-rail-expanded .glass-rail-label {
+    max-width: 5.5rem;
+    opacity: 1;
+  }
+
+  .glass-rail-item:hover:not(.glass-rail-item-selected) {
+    background: var(--glass-rail-hover);
+  }
+
+  .glass-rail-item-selected {
+    background: var(--glass-rail-selected);
+  }
+
+  .glass-rail-icon {
+    color: var(--muted);
+    transition: color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .glass-rail-item:hover .glass-rail-icon {
+    color: var(--text);
+    opacity: 1;
+  }
+
+  .glass-rail-item-selected .glass-rail-icon,
+  .glass-rail-item-selected .glass-rail-label {
+    color: var(--text);
+    opacity: 1;
+  }
+
+  .glass-rail-divider {
+    border-top: 1px solid var(--glass-rail-divider);
+    margin-top: 0.25rem;
+    padding-top: 0.25rem;
+  }
+
+  .dot-bg {
+    background-image:
+      radial-gradient(circle, var(--dot-primary) 1.25px, transparent 1.25px),
+      radial-gradient(circle, var(--dot-secondary) 0.75px, transparent 0.75px);
+    background-size: 32px 32px, 22px 22px;
+    background-position: 0 0, 11px 16px;
+  }
+
+
+  .reveal {
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .reveal-up { transform: translateY(24px); }
+  .reveal-left { transform: translateX(-24px); }
+  .reveal-right { transform: translateX(24px); }
+
+  .reveal-visible {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  .btn-ember {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    padding: 0.625rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .btn-ember-primary {
+    color: #ffffff;
+    background: #f97316;
+    border: 1px solid transparent;
+  }
+
+  .btn-ember-primary:hover {
+    background: #ea580c;
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+  }
+
+  .btn-ember-white {
+    color: #ffffff;
+    background: #78716c;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-ember-white:hover {
+    background: #57534e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+
+  .skill-pill {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
+    border: 1px solid var(--border);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .dark .skill-pill,
+  :root.dark .skill-pill {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text);
+  }
+
+  .light .skill-pill {
+    background: #f5f5f4;
+    color: #1c1917;
+    border-color: #d6d3d1;
+  }
+
+  .skill-pill:hover {
+    border-color: rgba(249, 115, 22, 0.5);
+    color: #f97316;
+  }
+
+  .btn-ember-ghost {
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--border);
+  }
+
+  .btn-ember-ghost:hover {
+    color: #f97316;
+    border-color: rgba(249, 115, 22, 0.45);
+    box-shadow: 0 0 16px rgba(249, 115, 22, 0.12);
+  }
+
+  .btn-ember-link {
+    position: relative;
+    display: inline-block;
+    color: #f97316;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding-bottom: 2px;
+  }
+
+  .btn-ember-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  .btn-ember-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* Resume document — warm paper tone */
+  .resume-doc {
+    background: #d4d0c8;
+    color: #3a3834;
+    border-radius: 1rem;
+    padding: 2.5rem 2.75rem;
+    box-shadow:
+      0 25px 50px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(0, 0, 0, 0.06);
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    user-select: text;
+  }
+
+  .resume-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #c2beb6;
+  }
+
+  .resume-name {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: #2c2a27;
+  }
+
+  .resume-contact-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
+    color: #78716c;
+  }
+
+  .resume-contact-line a {
+    color: #78716c;
+    text-decoration: none;
+  }
+
+  .resume-contact-line a:hover {
+    color: #44403c;
+  }
+
+  .resume-contact-sep {
+    color: #b8b4ac;
+  }
+
+  .resume-role {
+    margin-top: 0.25rem;
+    color: #5c5852;
+    font-size: 0.9375rem;
+  }
+
+  .resume-socials {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 0.25rem;
+  }
+
+  .resume-social-link {
+    color: #57534e;
+    transition: color 0.2s ease;
+  }
+
+  .resume-social-link:hover {
+    color: #f97316;
+  }
+
+  .resume-skill-label {
+    font-weight: 600;
+    color: #3d3a36;
+  }
+
+  .resume-entry-tags {
+    font-size: 0.8125rem;
+    color: #78716c;
+    font-family: "JetBrains Mono", monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .resume-section {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    gap: 1rem 2rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid #c2beb6;
+  }
+
+  .resume-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .resume-label {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #2c2a27;
+    padding-top: 0.1rem;
+  }
+
+  .resume-content {
+    color: #4a4744;
+  }
+
+  .resume-content p {
+    margin: 0;
+  }
+
+  .resume-entry + .resume-entry {
+    margin-top: 1.25rem;
+  }
+
+  .resume-entry-title {
+    font-weight: 600;
+    color: #2c2a27;
+    margin: 0;
+  }
+
+  .resume-entry-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .resume-entry-title a:hover {
+    color: #f97316;
+  }
+
+  .resume-entry-sub {
+    margin: 0.15rem 0 0;
+    color: #57534e;
+  }
+
+  .resume-entry-meta {
+    margin: 0.2rem 0 0;
+    font-size: 0.8125rem;
+    color: #a8a29e;
+  }
+
+  .resume-bullets {
+    margin: 0.5rem 0 0;
+    padding-left: 1.1rem;
+    list-style: disc;
+  }
+
+  .resume-bullets li {
+    margin-top: 0.25rem;
+  }
+
+  .resume-bullets li::marker {
+    color: #b8b4ac;
+  }
+
+  @media (max-width: 540px) {
+    .resume-doc {
+      padding: 1.75rem 1.5rem;
+    }
+
+    .resume-header {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .resume-socials {
+      align-self: flex-start;
+    }
+
+    .resume-section {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
