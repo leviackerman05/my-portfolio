@@ -6,12 +6,12 @@ import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import IconRail from './IconRail';
 import MobileNav from './MobileNav';
 import ThemeToggle from './ThemeToggle';
-import ScrollProgress from './ScrollProgress';
 import Reveal from './Reveal';
 import { blogPosts } from '../data/portfolio';
 
 export const POSTS = blogPosts.map((p) => ({
   id: p.id,
+  slug: p.slug,
   title: p.title,
   author: 'Priyansh Singh',
   date: p.date,
@@ -21,9 +21,9 @@ export const POSTS = blogPosts.map((p) => ({
 }));
 
 const FullBlogPost = () => {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const [content, setContent] = useState<string>('');
-  const post = POSTS.find((p) => p.id === id);
+  const post = POSTS.find((p) => p.slug === slug);
 
   useEffect(() => {
     if (post) {
@@ -49,7 +49,6 @@ const FullBlogPost = () => {
   return (
     <div className="min-h-screen bg-canvas text-foreground relative overflow-hidden">
       <div className="fixed inset-0 pointer-events-none dot-bg" />
-      <ScrollProgress />
       <ThemeToggle />
       <IconRail />
       <MobileNav />

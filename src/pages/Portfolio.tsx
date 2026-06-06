@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import IconRail from '../components/IconRail';
 import MobileNav from '../components/MobileNav';
 import ThemeToggle from '../components/ThemeToggle';
-import ScrollProgress from '../components/ScrollProgress';
 import Hero from '../components/sections/Hero';
 import About from '../components/sections/About';
 import Experience from '../components/sections/Experience';
@@ -25,7 +24,6 @@ const Portfolio = () => {
     <div className="min-h-screen bg-canvas text-foreground relative overflow-hidden">
       <div className="fixed inset-0 pointer-events-none dot-bg" />
 
-      <ScrollProgress />
       <ThemeToggle />
       <IconRail />
       <MobileNav />

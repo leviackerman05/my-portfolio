@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { IconType } from 'react-icons';
 import { HiHome, HiBriefcase, HiUser, HiCollection, HiBookOpen } from 'react-icons/hi';
 import { scrollToSection } from '../utils/scroll';
+import { isHomePath, sectionLink } from '../utils/nav';
 
 interface NavItem {
   id: string;
@@ -11,7 +12,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { id: 'hero', icon: HiHome, label: 'Home' },
+  { id: 'home', icon: HiHome, label: 'Home' },
   { id: 'about', icon: HiUser, label: 'About' },
   { id: 'experience', icon: HiBriefcase, label: 'Work' },
   { id: 'projects', icon: HiCollection, label: 'Projects' },
@@ -24,7 +25,7 @@ const itemClass = (selected: boolean) =>
 const IconRail = () => {
   const [expanded, setExpanded] = useState(false);
   const location = useLocation();
-  const isHome = location.pathname === '/';
+  const isHome = isHomePath(location.pathname);
   const isBlog = location.pathname === '/blog' || location.pathname.startsWith('/blog/');
 
   const isSelected = (id: string) => id === 'blog' && isBlog;
@@ -50,7 +51,7 @@ const IconRail = () => {
     }
 
     return (
-      <Link key={item.id} to={`/#${item.id}`} className={className}>
+      <Link key={item.id} to={sectionLink(item.id)} className={className}>
         {renderItemContent(item)}
       </Link>
     );

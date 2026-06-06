@@ -202,6 +202,47 @@
       box-shadow 0.2s ease;
   }
 
+  .btn-hero-action {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-ember-resume-wrap {
+    position: relative;
+    display: inline-flex;
+    border-radius: 9999px;
+    padding: 2px;
+    overflow: hidden;
+  }
+
+  .btn-ember-resume-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -100%;
+    background: conic-gradient(
+      from 0deg,
+      #f97316,
+      #fbbf24,
+      #ea580c,
+      #fb923c,
+      #f97316
+    );
+    animation: resume-border-spin 3s linear infinite;
+  }
+
+  @keyframes resume-border-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .btn-ember-resume-wrap .btn-ember-primary {
+    position: relative;
+    z-index: 1;
+    border: none;
+  }
+
   .btn-ember-primary {
     color: #ffffff;
     background: #f97316;
@@ -283,6 +324,112 @@
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.25s ease;
+  }
+
+  .project-hero {
+    position: relative;
+  }
+
+  .project-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.45) 100%
+    );
+    pointer-events: none;
+  }
+
+  .project-visit-btn {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 2;
+  }
+
+  .project-visit-btn-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    font-family: "Space Grotesk", sans-serif;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  }
+
+  .project-visit-btn:hover .project-visit-btn-inner {
+    transform: scale(1.06);
+    background: rgba(249, 115, 22, 0.88);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 6px 32px rgba(249, 115, 22, 0.35);
+  }
+
+  .project-visit-btn-static {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 9999px;
+    background: rgba(249, 115, 22, 0.15);
+    border: 1px solid rgba(249, 115, 22, 0.35);
+    color: #f97316;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .project-visit-btn-static:hover {
+    background: rgba(249, 115, 22, 0.25);
+    transform: scale(1.04);
+  }
+
+  .project-hero-placeholder {
+    background: linear-gradient(
+      135deg,
+      rgba(249, 115, 22, 0.06) 0%,
+      rgba(28, 25, 23, 0.4) 100%
+    );
+  }
+
+  .light .project-hero-placeholder {
+    background: linear-gradient(
+      135deg,
+      rgba(249, 115, 22, 0.08) 0%,
+      rgba(250, 248, 245, 0.9) 100%
+    );
+  }
+
+  .project-highlight-card {
+    position: relative;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .project-highlight-card:hover {
+    border-color: rgba(249, 115, 22, 0.35);
+    transform: translateY(-2px);
+  }
+
+  .project-highlight-num {
+    display: inline-block;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f97316;
+    opacity: 0.7;
+    line-height: 1;
   }
 
   .btn-ember-link:hover::after {

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import IconRail from '../components/IconRail';
 import MobileNav from '../components/MobileNav';
 import ThemeToggle from '../components/ThemeToggle';
-import ScrollProgress from '../components/ScrollProgress';
 import Reveal from '../components/Reveal';
 import { blogPosts as POSTS } from '../data/portfolio';
 
@@ -12,7 +11,6 @@ const Blog: FC = () => {
     <div className="min-h-screen bg-canvas text-foreground relative overflow-hidden">
       <div className="fixed inset-0 pointer-events-none dot-bg" />
 
-      <ScrollProgress />
       <ThemeToggle />
       <IconRail />
       <MobileNav />
@@ -25,10 +23,10 @@ const Blog: FC = () => {
           </p>
         </Reveal>
 
-        <div className="divide-y divide-stroke/40">
+        <div className="space-y-10">
           {POSTS.map((post) => (
-            <article key={post.id} className="py-8 first:pt-0">
-              <Link to={`/blog/${post.id}`} className="group block">
+            <article key={post.id}>
+              <Link to={`/blog/${post.slug}`} className="group block">
                 <div className="flex items-center text-sm text-muted font-mono mb-2">
                   <span>{post.date}</span>
                   <span className="mx-2">·</span>

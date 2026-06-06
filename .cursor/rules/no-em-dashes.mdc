@@ -1,0 +1,24 @@
+---
+description: Never use em dashes in any written text
+alwaysApply: true
+---
+
+# No Em Dashes
+
+Never use em dashes (the long dash character) in any text you write for this project.
+
+This applies to:
+- UI copy and labels
+- Markdown blog posts and project write-ups
+- Code comments
+- Documentation
+- Commit messages
+- Data strings in portfolio.ts and similar files
+
+Use these alternatives instead:
+- Colons: "Vizion: a text-to-animation tool"
+- Commas: "React, TypeScript, and Tailwind"
+- Parentheses: "Nest (in closed testing)"
+- Separate sentences
+
+Before finishing any task, scan your written text for em dashes and replace them.

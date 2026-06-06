@@ -10,19 +10,19 @@ const SocialLinks = ({ className = '' }: SocialLinksProps) => {
   const linkedIn = socials.find((s) => s.name === 'LinkedIn');
 
   const linkClass =
-    'text-muted hover:text-ember transition-colors active:scale-95';
+    'inline-flex items-center gap-2 text-sm text-muted hover:text-ember transition-colors active:scale-95';
 
   return (
-    <div className={`flex items-center gap-4 ${className}`}>
+    <div className={`flex flex-wrap items-center gap-5 ${className}`}>
       {github && (
         <a
           href={github.url}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="GitHub"
           className={linkClass}
         >
-          <SiGithub size={20} />
+          <SiGithub size={18} aria-hidden />
+          <span className="font-mono">GitHub</span>
         </a>
       )}
       {linkedIn && (
@@ -30,10 +30,10 @@ const SocialLinks = ({ className = '' }: SocialLinksProps) => {
           href={linkedIn.url}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="LinkedIn"
           className={linkClass}
         >
-          <SiLinkedin size={20} />
+          <SiLinkedin size={18} aria-hidden />
+          <span className="font-mono">LinkedIn</span>
         </a>
       )}
     </div>

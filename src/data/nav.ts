@@ -1,5 +1,5 @@
 export const mobileNavItems = [
-  { id: 'hero', label: 'Home' },
+  { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
   { id: 'experience', label: 'Work' },
   { id: 'projects', label: 'Projects' },

@@ -7,10 +7,10 @@ const Writing = () => (
     <Reveal>
       <h2 className="text-muted text-sm font-mono uppercase tracking-widest mb-8">Writing</h2>
     </Reveal>
-    <div className="divide-y divide-stroke/40">
-      {blogPosts.map((post) => (
-        <article key={post.id} className="py-6 first:pt-0">
-          <Link to={`/blog/${post.id}`} className="group block">
+    <div className="space-y-8">
+      {blogPosts.slice(0, 4).map((post) => (
+        <article key={post.id}>
+          <Link to={`/blog/${post.slug}`} className="group block">
             <p className="text-muted text-xs font-mono mb-2">
               {post.date} · {post.readTime}
             </p>
