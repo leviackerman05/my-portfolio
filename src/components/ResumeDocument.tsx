@@ -29,7 +29,15 @@ const ResumeDocument = () => (
         <p className="resume-role">{resumeProfile.title}</p>
         <p className="resume-contact-line">
           <a href={`mailto:${resumeProfile.email}`}>{resumeProfile.email}</a>
-          {' · '}
+          <span className="resume-contact-sep"> · </span>
+          <a href={resumeProfile.linkedIn} target="_blank" rel="noopener noreferrer">
+            LinkedIn
+          </a>
+          <span className="resume-contact-sep"> · </span>
+          <a href={resumeProfile.github} target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+          <span className="resume-contact-sep"> · </span>
           <a href={resumeProfile.portfolioUrl} target="_blank" rel="noopener noreferrer">
             Portfolio
           </a>
@@ -91,20 +99,14 @@ const ResumeDocument = () => (
     <ResumeSection label="Projects">
       {resumeProjects.map((p) => (
         <div key={p.id} className="resume-entry">
-          <p className="resume-entry-title">
-            {p.link ? (
+          <p>
+            <span className="resume-entry-title">{p.title}</span> ({p.tags}): {p.summary}{' '}
+            {p.link && (
               <a href={p.link} target="_blank" rel="noopener noreferrer">
-                {p.title}
+                Try it here
               </a>
-            ) : (
-              <>
-                {p.title}
-                <span className="resume-entry-tags"> | {p.tags}</span>
-              </>
             )}
           </p>
-          {p.link && <p className="resume-entry-meta resume-entry-tags">{p.tags}</p>}
-          <p>{p.summary}</p>
         </div>
       ))}
     </ResumeSection>
@@ -115,7 +117,7 @@ const ResumeDocument = () => (
         {resumeSkills.languagesFrameworks}
       </p>
       <p className="mt-2">
-        <span className="resume-skill-label">Tools:</span> {resumeSkills.tools}
+        <span className="resume-skill-label">Tools & Platforms:</span> {resumeSkills.tools}
       </p>
     </ResumeSection>
   </article>

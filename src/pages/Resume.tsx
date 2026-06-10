@@ -6,7 +6,7 @@ import ResumeDocument from '../components/ResumeDocument';
 import { profile } from '../data/portfolio';
 
 const PDF_URL = '/resume.pdf';
-const DOWNLOAD_NAME = 'PriyanshSingh_Resume.pdf';
+const DOWNLOAD_NAME = 'PriyanshSingh_5YOE.pdf';
 
 const DownloadButton = ({ className = '' }: { className?: string }) => (
   <a

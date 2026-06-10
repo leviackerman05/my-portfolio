@@ -24,11 +24,11 @@ export const resumeExperience = [
     location: 'Bangalore, India',
     highlights: [
       'Rebuilt the enterprise teammate management page in React: invite by email, link, or CSV; search and filter the team; change roles and license types; manage pending invites and export lists.',
-      'Launched the admin home page enterprise customers see on login: seat usage, pending invites, and setup guidance; led rollout to US and Canada with in-app walkthroughs and banners.',
+      'Launched the admin home page with seat usage, pending invites, and setup guidance; rolled out to US and Canada with in-app walkthroughs.',
       'Built custom roles and permissions settings so admins control who can create surveys, view analytics, or share results; fixed role creation validation and permission edge cases.',
       'Fixed a multi-language login bug for global customers: users who chose Dutch, Japanese, or other languages still landed on English pages; patched the shared auth library and shipped the fix across our web apps.',
-      'Improved the admin user activity report (SSO and join-date columns, sorting, pagination) and built a custom tag editor for organizing surveys in the enterprise content library.',
-      'Security and release ownership: remediated XSS, log injection, SSRF, and vulnerable dependencies; raised test coverage to 85%+; owned deployments across all five services on the enterprise admin platform.',
+      'Improved the admin user activity report (SSO and join-date columns, sorting, pagination) and built a custom tag editor for enterprise survey content.',
+      'Security and release ownership: remediated XSS, log injection, SSRF, and vulnerable dependencies; raised test coverage to 85%+; owned deployments across five platform services.',
     ],
   },
   {
@@ -62,33 +62,29 @@ export const resumeProjects = [
   {
     id: '1',
     title: 'Resumate',
-    tags: 'NEXT.JS, GROQ, TYPESCRIPT, REACT PDF',
-    summary:
-      'AI cover letter studio with resume/JD parsing and vector PDF export.',
+    tags: 'Next.js, Groq',
+    summary: 'AI cover letter studio with resume/JD parsing and PDF export.',
     link: 'https://priyansh-singh.vercel.app/projects/resumate',
   },
   {
     id: '2',
     title: 'Betternote',
-    tags: 'RUST, REACT, TYPESCRIPT, SQLITE, TAURI',
-    summary:
-      'Local-first macOS notes with TipTap, Ollama AI, and Jira; shipped as DMG.',
+    tags: 'Rust, React, Tauri',
+    summary: 'Local-first macOS notes with TipTap, Ollama, and Jira integration.',
     link: 'https://priyansh-singh.vercel.app/projects/betternote',
   },
   {
     id: '3',
     title: 'Nest',
-    tags: 'REACT NATIVE, EXPO, TYPESCRIPT, SQLITE',
-    summary:
-      'Offline finance tracker parsing bank SMS into on-device SQLite dashboards.',
+    tags: 'React Native, Expo',
+    summary: 'Offline finance tracker parsing bank SMS into SQLite dashboards.',
     link: 'https://priyansh-singh.vercel.app/projects/nest',
   },
   {
     id: '4',
     title: 'Vizion',
-    tags: 'REACT, FASTAPI, PYTHON, MANIM, GEMINI',
-    summary:
-      'AI text-to-animation pipeline with Gemini and Manim rendering.',
+    tags: 'React, FastAPI, Python',
+    summary: 'Text-to-animation pipeline with Gemini and Manim rendering.',
     link: 'https://priyansh-singh.vercel.app/projects/vizion',
   },
 ];
