@@ -1,5 +1,12 @@
 import { Link, useParams } from 'react-router-dom';
-import { HiExternalLink, HiArrowLeft, HiCode, HiBookOpen, HiChevronDown } from 'react-icons/hi';
+import {
+  HiExternalLink,
+  HiArrowLeft,
+  HiCode,
+  HiBookOpen,
+  HiChevronDown,
+  HiDownload,
+} from 'react-icons/hi';
 import { FaGithub } from 'react-icons/fa';
 import IconRail from '../components/IconRail';
 import MobileNav from '../components/MobileNav';
@@ -20,8 +27,13 @@ const ProjectDetail = () => {
     );
   }
 
-  const heroTarget = project.liveUrl ?? project.repos?.[0]?.url;
-  const heroLabel = project.liveUrl ? 'Visit' : 'View on GitHub';
+  const heroTarget = project.liveUrl ?? project.downloadUrl ?? project.repos?.[0]?.url;
+  const heroLabel = project.liveUrl
+    ? 'Visit'
+    : project.downloadUrl
+      ? (project.downloadLabel ?? 'Download')
+      : 'View on GitHub';
+  const heroIsDownload = Boolean(!project.liveUrl && project.downloadUrl);
   const hasImage = Boolean(project.image);
 
   return (
@@ -77,6 +89,8 @@ const ProjectDetail = () => {
                     <span className="project-visit-btn-inner">
                       {project.liveUrl ? (
                         <HiExternalLink size={18} aria-hidden />
+                      ) : heroIsDownload ? (
+                        <HiDownload size={18} aria-hidden />
                       ) : (
                         <FaGithub size={18} aria-hidden />
                       )}
@@ -125,6 +139,17 @@ const ProjectDetail = () => {
               >
                 <HiExternalLink size={14} aria-hidden />
                 Live site
+              </a>
+            )}
+            {project.downloadUrl && (
+              <a
+                href={project.downloadUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-ember-ghost inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all"
+              >
+                <HiDownload size={14} aria-hidden />
+                {project.downloadLabel ?? 'Download'}
               </a>
             )}
             {project.repos?.map((repo) => (
@@ -206,6 +231,27 @@ const ProjectDetail = () => {
             <p className="text-foreground/80 text-base leading-relaxed mb-4">{section.body}</p>
           </Reveal>
         ))}
+
+        {project.screenshots && project.screenshots.length > 0 && (
+          <Reveal delay={0.2}>
+            <h2 className="text-xl font-display font-semibold text-foreground mb-4 mt-10">
+              Screenshots
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {project.screenshots.map((shot) => (
+                <figure key={shot.src} className="rounded-2xl overflow-hidden glass">
+                  <img
+                    src={shot.src}
+                    alt={shot.alt}
+                    className="w-full aspect-video object-cover object-top"
+                    loading="lazy"
+                  />
+                  <figcaption className="px-4 py-3 text-xs text-muted">{shot.alt}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </Reveal>
+        )}
 
         {project.video && (
           <Reveal delay={0.22}>

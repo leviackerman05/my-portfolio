@@ -1,3 +1,4 @@
+import betternoteImage from '../assets/Betternote.png';
 import resumateImage from '../assets/Resumate.png';
 import portfolioImage from '../assets/my-portfolio.png';
 import vizionImage from '../assets/vizion.png';
@@ -48,11 +49,14 @@ export interface Project {
   stack?: string[];
   sections?: ProjectSection[];
   liveUrl?: string;
+  downloadUrl?: string;
+  downloadLabel?: string;
   repos?: ProjectRepo[];
   blogSlug?: string;
   badge?: string;
   video?: string;
   poster?: string;
+  screenshots?: { src: string; alt: string }[];
 }
 
 export interface BlogPost {
@@ -149,6 +153,63 @@ export const skills = [
 ];
 
 export const projects: Project[] = [
+  {
+    id: '5',
+    slug: 'betternote',
+    title: 'Betternote',
+    image: betternoteImage,
+    summary:
+      'Local-first macOS notes app for developers with wiki links, quick capture, and optional local AI.',
+    tags: ['Tauri', 'React', 'TypeScript', 'SQLite'],
+    tagline: 'Notes for developers who care where their data lives.',
+    overview:
+      'Betternote is a desktop notes app I designed and built end-to-end for macOS. It targets developers who need a fast, keyboard-driven workspace without accounts, servers, or data leaving their machine. On the frontend, I built a React + TypeScript UI with a custom TipTap editor: floating format toolbar, wiki-style [[links]], backlinks, tags, reminders, note locking, and a command palette (⌘K) for quick capture and navigation. The backend is Rust (Tauri v2) with SQLite for persistence, encrypted note locking, macOS keychain integration, and Tauri commands for CRUD, search, and exports. Optional integrations include Ollama for on-device LLM tasks, Jira for ticket creation from notes, and a generic MCP connector, all behind explicit privacy settings.',
+    highlights: [
+      'Local-first notes app with no backend, no login, and data on device',
+      'Rich TipTap editor: bold/italic/links, task lists, slash commands, selection toolbar',
+      'Wiki links and backlinks between notes via [[Note title]] syntax',
+      'Global search (⌘K), find-in-note (⌘F), and quick capture (⌘N)',
+      'Workspaces, tags, favorites, reminders, note lock, and export',
+      'Optional local AI (Ollama): summarize, rewrite, extract tasks, explain',
+      'Optional Jira and MCP integrations, disabled by default via Local Only Mode',
+      'Shipped as a distributable .dmg with GitHub Actions CI/CD for macOS releases',
+    ],
+    stack: [
+      'Tauri v2',
+      'Rust',
+      'React',
+      'TypeScript',
+      'SQLite',
+      'TipTap',
+      'Ollama',
+      'Vite',
+    ],
+    sections: [
+      {
+        heading: 'Privacy by default',
+        body: 'Local Only Mode blocks all outbound network calls until you opt in. Notes and settings live in ~/Library/Application Support/com.betternotes.desktop. Integrations for Jira, MCP, and Ollama require explicit enablement in Settings.',
+      },
+      {
+        heading: 'Editor and navigation',
+        body: 'The TipTap editor includes custom extensions for wiki links, find-in-note search, Jira chips, and AI agent blocks. Keyboard shortcuts cover search (⌘K), find in note (⌘F), quick capture (⌘N), and slash commands in the editor.',
+      },
+      {
+        heading: 'Install on macOS',
+        body: 'Download the DMG from GitHub Releases, drag Betternote into Applications, and open from there. Because the app is not Apple-notarized, macOS may block the first launch. Right-click the app and choose Open once, or run xattr -cr /Applications/Betternote.app in Terminal.',
+      },
+    ],
+    downloadUrl:
+      'https://github.com/leviackerman05/Betternotes/releases/latest/download/Betternote.dmg',
+    downloadLabel: 'Download for macOS',
+    repos: [{ label: 'GitHub', url: 'https://github.com/leviackerman05/Betternotes' }],
+    screenshots: [
+      { src: '/betternote/editor-home.png', alt: 'Betternote home screen with quick actions' },
+      { src: '/betternote/jira-sprint.png', alt: 'Jira sprint board synced inside Betternote' },
+      { src: '/betternote/settings.png', alt: 'Privacy and appearance settings' },
+      { src: '/betternote/integrations.png', alt: 'Optional integrations including Jira and MCP' },
+      { src: '/betternote/light-mode.png', alt: 'Betternote in light mode' },
+    ],
+  },
   {
     id: '1',
     slug: 'resumate',
