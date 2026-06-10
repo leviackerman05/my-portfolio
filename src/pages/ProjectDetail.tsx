@@ -16,6 +16,7 @@ import Reveal from '../components/Reveal';
 import ImageLightbox from '../components/ImageLightbox';
 import ScreenshotSlider from '../components/ScreenshotSlider';
 import { projects } from '../data/portfolio';
+import { sectionLink } from '../utils/nav';
 import { scrollToSection } from '../utils/scroll';
 
 const ProjectDetail = () => {
@@ -59,7 +60,7 @@ const ProjectDetail = () => {
       <main className="relative max-w-3xl mx-auto px-6 pt-20 md:pt-12 pb-20 md:pl-24">
         <Reveal>
           <Link
-            to="/home#projects"
+            to={sectionLink('projects')}
             className="inline-flex items-center gap-2 text-sm text-muted hover:text-ember transition-colors mb-8 font-mono"
           >
             <HiArrowLeft size={14} aria-hidden />
