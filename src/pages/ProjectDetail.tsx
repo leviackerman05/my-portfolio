@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
   HiExternalLink,
@@ -12,12 +13,15 @@ import IconRail from '../components/IconRail';
 import MobileNav from '../components/MobileNav';
 import ThemeToggle from '../components/ThemeToggle';
 import Reveal from '../components/Reveal';
+import ImageLightbox from '../components/ImageLightbox';
+import ScreenshotSlider from '../components/ScreenshotSlider';
 import { projects } from '../data/portfolio';
 import { scrollToSection } from '../utils/scroll';
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = projects.find((p) => p.slug === slug);
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
 
   if (!project) {
     return (
@@ -35,6 +39,7 @@ const ProjectDetail = () => {
       : 'View on GitHub';
   const heroIsDownload = Boolean(!project.liveUrl && project.downloadUrl);
   const hasImage = Boolean(project.image);
+  const hasScreenshots = Boolean(project.screenshots && project.screenshots.length > 0);
 
   return (
     <div className="min-h-screen bg-canvas text-foreground relative overflow-hidden">
@@ -42,6 +47,14 @@ const ProjectDetail = () => {
       <ThemeToggle />
       <IconRail />
       <MobileNav />
+
+      {lightbox && (
+        <ImageLightbox
+          src={lightbox.src}
+          alt={lightbox.alt}
+          onClose={() => setLightbox(null)}
+        />
+      )}
 
       <main className="relative max-w-3xl mx-auto px-6 pt-20 md:pt-12 pb-20 md:pl-24">
         <Reveal>
@@ -129,7 +142,7 @@ const ProjectDetail = () => {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="flex flex-wrap gap-3 mb-10">
+          <div className="flex flex-wrap gap-3 mb-8">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
@@ -183,29 +196,52 @@ const ProjectDetail = () => {
                 See it in action
               </button>
             )}
+            {hasScreenshots && (
+              <button
+                type="button"
+                onClick={() => scrollToSection('screenshots')}
+                className="btn-ember-ghost inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all"
+              >
+                <HiChevronDown size={14} aria-hidden />
+                Screenshots
+              </button>
+            )}
           </div>
         </Reveal>
 
         {project.overview && (
-          <Reveal delay={0.12}>
-            <p className="text-foreground/80 text-base leading-relaxed mb-10">{project.overview}</p>
+          <Reveal delay={0.11}>
+            <p className="text-foreground/80 text-base leading-relaxed mb-8">{project.overview}</p>
           </Reveal>
         )}
 
         {project.highlights && project.highlights.length > 0 && (
-          <Reveal delay={0.14}>
+          <Reveal delay={0.12}>
             <h2 className="text-sm font-mono uppercase tracking-widest text-muted mb-4">
               Highlights
             </h2>
-            <div className="grid sm:grid-cols-2 gap-3 mb-10">
-              {project.highlights.map((item, i) => (
-                <div key={item} className="project-highlight-card glass rounded-xl p-4">
-                  <span className="project-highlight-num">{String(i + 1).padStart(2, '0')}</span>
-                  <p className="text-sm text-foreground/80 leading-relaxed mt-2">{item}</p>
-                </div>
+            <ul className="project-highlights-list space-y-2.5 mb-8">
+              {project.highlights.map((item) => (
+                <li key={item} className="text-sm text-foreground/80 leading-relaxed">
+                  {item}
+                </li>
               ))}
-            </div>
+            </ul>
           </Reveal>
+        )}
+
+        {hasScreenshots && (
+          <div id="screenshots">
+            <Reveal delay={0.13}>
+              <h2 className="text-sm font-mono uppercase tracking-widest text-muted mb-4">
+                Screenshots
+              </h2>
+              <ScreenshotSlider
+                screenshots={project.screenshots!}
+                onOpen={(shot) => setLightbox({ src: shot.src, alt: shot.alt })}
+              />
+            </Reveal>
+          </div>
         )}
 
         {project.stack && project.stack.length > 0 && (
@@ -213,7 +249,7 @@ const ProjectDetail = () => {
             <h2 className="text-sm font-mono uppercase tracking-widest text-muted mb-4">
               Tech stack
             </h2>
-            <div className="flex flex-wrap gap-2 mb-10">
+            <div className="flex flex-wrap gap-2 mb-8">
               {project.stack.map((tech) => (
                 <span key={tech} className="skill-pill">
                   {tech}
@@ -225,33 +261,12 @@ const ProjectDetail = () => {
 
         {project.sections?.map((section, i) => (
           <Reveal key={section.heading} delay={0.18 + i * 0.04}>
-            <h2 className="text-xl font-display font-semibold text-foreground mb-3 mt-8">
+            <h2 className="text-lg font-display font-semibold text-foreground mb-2 mt-6">
               {section.heading}
             </h2>
-            <p className="text-foreground/80 text-base leading-relaxed mb-4">{section.body}</p>
+            <p className="text-foreground/75 text-sm leading-relaxed mb-4">{section.body}</p>
           </Reveal>
         ))}
-
-        {project.screenshots && project.screenshots.length > 0 && (
-          <Reveal delay={0.2}>
-            <h2 className="text-xl font-display font-semibold text-foreground mb-4 mt-10">
-              Screenshots
-            </h2>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {project.screenshots.map((shot) => (
-                <figure key={shot.src} className="rounded-2xl overflow-hidden glass">
-                  <img
-                    src={shot.src}
-                    alt={shot.alt}
-                    className="w-full aspect-video object-cover object-top"
-                    loading="lazy"
-                  />
-                  <figcaption className="px-4 py-3 text-xs text-muted">{shot.alt}</figcaption>
-                </figure>
-              ))}
-            </div>
-          </Reveal>
-        )}
 
         {project.video && (
           <Reveal delay={0.22}>

@@ -29,6 +29,10 @@ const ResumeDocument = () => (
         <p className="resume-role">{resumeProfile.title}</p>
         <p className="resume-contact-line">
           <a href={`mailto:${resumeProfile.email}`}>{resumeProfile.email}</a>
+          {' · '}
+          <a href={resumeProfile.portfolioUrl} target="_blank" rel="noopener noreferrer">
+            Portfolio
+          </a>
         </p>
       </div>
       <div className="resume-socials">

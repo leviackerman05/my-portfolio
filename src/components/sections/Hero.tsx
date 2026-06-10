@@ -20,19 +20,24 @@ const Hero = () => {
   return (
     <section id="home" className="mb-20 scroll-mt-24 text-center md:text-left relative">
       <Reveal>
-        <div className="flex flex-wrap items-center justify-center md:justify-between gap-4 mb-2 w-full">
-          <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight">
-            {profile.name.split(' ')[0]}
-          </h1>
-          <SocialLinks className="shrink-0" />
+        <div className="w-full">
+          <div className="md:flex md:items-start md:justify-between md:gap-6">
+            <div className="text-center md:text-left">
+              <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight mb-2">
+                {profile.name.split(' ')[0]}
+              </h1>
+              <p className="text-foreground/75 text-sm mb-2">
+                {profile.title} · {profile.location}
+              </p>
+              <p className="text-foreground/50 text-sm">
+                {profile.yearsOfExperience} years building web products
+              </p>
+            </div>
+            <SocialLinks className="hidden md:flex shrink-0 mt-1" />
+          </div>
+          <SocialLinks className="flex md:hidden justify-center mt-5 mb-1" />
         </div>
-        <p className="text-foreground/75 text-sm mb-2">
-          {profile.title} · {profile.location}
-        </p>
-        <p className="text-foreground/50 text-sm mb-8">
-          {profile.yearsOfExperience} years building web products
-        </p>
-        <p className="text-base md:text-lg text-foreground/80 leading-relaxed max-w-xl italic">
+        <p className="text-base md:text-lg text-foreground/80 leading-relaxed max-w-xl italic mt-6 md:mt-8">
           {profile.shortBio}
         </p>
         <div className="flex flex-wrap items-center gap-3 mt-8 justify-center md:justify-start">

@@ -2,13 +2,14 @@ export const resumeProfile = {
   name: 'Priyansh Singh',
   title: 'Senior Software Engineer',
   email: 'singhpriyansh2000@gmail.com',
+  portfolioUrl: 'https://priyansh-singh.vercel.app/',
   linkedIn: 'https://www.linkedin.com/in/priyansh-s-435504173/',
   github: 'https://github.com/leviackerman05',
-  summary: `Software Engineer with 5 years of experience building scalable, secure, and high-performance web applications. Skilled in modern frontend and backend development, API-driven architectures, and improving system reliability. Experienced in leading cross-functional initiatives and delivering impactful solutions using React, Next.js, Vue, Node.js, and GraphQL.`,
+  summary: `Senior Software Engineer with 5 years building enterprise admin platforms, design systems, and full-stack products. Strong in React, TypeScript, Next.js, GraphQL, Python, and Rust. Led admin modernization, security remediation, and production releases.`,
 };
 
 export const resumeEducation = {
-  school: 'Sir. M Visvesvaraya Institute of Technology, Bangalore',
+  school: 'Sir M Visvesvaraya Institute of Technology, Bangalore',
   degree: 'Bachelor of Engineering in Computer Science',
   date: '2017 – 2021',
   location: 'Bangalore, India',
@@ -17,33 +18,31 @@ export const resumeEducation = {
 export const resumeExperience = [
   {
     id: '1',
-    company: 'Survey Monkey',
-    title: 'Software Engineer - II',
+    company: 'SurveyMonkey',
+    title: 'Software Engineer II, Enterprise Admin',
     date: 'Nov 2024 – Present',
     location: 'Bangalore, India',
     highlights: [
-      'Led modernization efforts for the Enterprise Admin experience by building React-based workflows, advanced filtering, search, and user-management actions, improving usability and overall performance across large enterprise accounts.',
-      'Integrated GraphQL and REST APIs while collaborating with backend engineers to refine data contracts, support multi-filter queries, and ensure consistent behavior across admin workflows.',
-      'Delivered major enhancements to the Custom Question Bank, including a complete tag-management experience with reusable components, optimized data-sync logic, and improved content organization.',
-      'Improved security posture by addressing XSS and injection vulnerabilities, sanitizing unsafe inputs, updating dependencies, and adopting secure coding practices.',
-      'Increased platform reliability by resolving production issues related to access control, reporting discrepancies, and UI state handling across React and backend integrations.',
-      'Collaborated effectively with Product, Design, Backend, QA, and Customer Operations to clarify requirements, validate edge cases, and ensure high-quality delivery.',
-      'Maintained code quality with CodeQL, consistently achieved 85%+ test coverage, and ensured high system reliability by maintaining an SLA of 99.976% while minimizing production issues.',
+      'Rebuilt the enterprise teammate management page in React: invite by email, link, or CSV; search and filter the team; change roles and license types; manage pending invites and export lists.',
+      'Launched the admin home page enterprise customers see on login: seat usage, pending invites, and setup guidance; led rollout to US and Canada with in-app walkthroughs and banners.',
+      'Built custom roles and permissions settings so admins control who can create surveys, view analytics, or share results; fixed role creation validation and permission edge cases.',
+      'Fixed a multi-language login bug for global customers: users who chose Dutch, Japanese, or other languages still landed on English pages; patched the shared auth library and shipped the fix across our web apps.',
+      'Improved the admin user activity report (SSO and join-date columns, sorting, pagination) and built a custom tag editor for organizing surveys in the enterprise content library.',
+      'Security and release ownership: remediated XSS, log injection, SSRF, and vulnerable dependencies; raised test coverage to 85%+; owned deployments across all five services on the enterprise admin platform.',
     ],
   },
   {
     id: '2',
-    company: 'Mile Tech (prev. Automatad INC)',
-    title: 'SDE - Frontend Engineer',
-    date: 'June 2022 – Oct 2024',
+    company: 'Mile Tech (prev. Automatad)',
+    title: 'SDE, Frontend Engineer',
+    date: 'Jun 2022 – Oct 2024',
     location: 'Remote / Bangalore',
     highlights: [
-      'Led development of reusable design systems and component libraries used across multiple products.',
-      'Worked extensively with Vue (2/3) and React, optimizing state management using Redux and Context API.',
-      'Built customer-facing dashboards integrating RBAC, dynamic forms, and real-time APIs.',
-      'Migrated legacy apps into a Micro Frontend architecture, reducing build times by over 90%.',
-      'Integrated REST and GraphQL APIs while reducing payload size by 25% and improving render performance by 15%.',
-      'Enabled CI/CD automation with GitHub Actions for streamlined deployments.',
+      'Built reusable design systems and component libraries used across multiple Vue and React products.',
+      'Worked across Vue 2/3 and React with Redux and Context API for complex application state.',
+      'Migrated legacy apps to a micro frontend architecture, cutting build times by 90%.',
+      'Delivered RBAC dashboards with dynamic forms and real-time APIs; reduced payload size by 25% and improved render performance by 15%.',
+      'Set up GitHub Actions CI/CD for automated deployments across frontend services.',
     ],
   },
   {
@@ -53,8 +52,8 @@ export const resumeExperience = [
     date: 'Aug 2021 – Jun 2022',
     location: 'Bangalore, India',
     highlights: [
-      'Contributed to AngularJS-based internal tools and led migration to Angular for improved maintainability.',
-      'Participated in code reviews, documentation, and engineering workshops focused on cloud-native architecture.',
+      'Contributed to AngularJS internal tools and led migration to Angular for improved maintainability.',
+      'Participated in code reviews, documentation, and cloud-native architecture workshops.',
     ],
   },
 ];
@@ -62,22 +61,40 @@ export const resumeExperience = [
 export const resumeProjects = [
   {
     id: '1',
-    title: 'Vizion',
-    tags: 'NEXTJS, FASTAPI, MANIM, PYTHON, GEMINI API',
+    title: 'Resumate',
+    tags: 'NEXT.JS, GROQ, TYPESCRIPT, REACT PDF',
     summary:
-      'Built an AI-powered educational video generator using Gemini API, FastAPI, Manim, and Next.js that transforms natural language prompts into rendered animation videos.',
+      'AI cover letter studio with resume/JD parsing and vector PDF export.',
+    link: 'https://priyansh-singh.vercel.app/projects/resumate',
   },
   {
     id: '2',
-    title: 'Personal Portfolio',
-    tags: 'REACT, TYPESCRIPT, TAILWIND CSS',
-    summary: 'Personal website showcasing experience, projects, and technical background.',
-    link: 'https://priyansh-singh.vercel.app/',
+    title: 'Betternote',
+    tags: 'RUST, REACT, TYPESCRIPT, SQLITE, TAURI',
+    summary:
+      'Local-first macOS notes with TipTap, Ollama AI, and Jira; shipped as DMG.',
+    link: 'https://priyansh-singh.vercel.app/projects/betternote',
+  },
+  {
+    id: '3',
+    title: 'Nest',
+    tags: 'REACT NATIVE, EXPO, TYPESCRIPT, SQLITE',
+    summary:
+      'Offline finance tracker parsing bank SMS into on-device SQLite dashboards.',
+    link: 'https://priyansh-singh.vercel.app/projects/nest',
+  },
+  {
+    id: '4',
+    title: 'Vizion',
+    tags: 'REACT, FASTAPI, PYTHON, MANIM, GEMINI',
+    summary:
+      'AI text-to-animation pipeline with Gemini and Manim rendering.',
+    link: 'https://priyansh-singh.vercel.app/projects/vizion',
   },
 ];
 
 export const resumeSkills = {
   languagesFrameworks:
-    'ReactJS, NextJS, VueJS (2 & 3), Redux, Context API, NodeJS, Express, JavaScript, TypeScript, Python, GraphQL, HTML, CSS, Tailwind CSS',
-  tools: 'Git, Postman, Yarn, NPM, Vite, Babel, Jest, React Testing Library, GitHub Actions, Linux',
+    'React, Next.js, TypeScript, JavaScript, Vue.js, Node.js, GraphQL, Python, Rust, React Native, HTML, CSS, Tailwind CSS',
+  tools: 'Git, GitHub Actions, Jest, React Testing Library, Vite, Docker, SQLite, REST APIs, CI/CD, Linux',
 };
