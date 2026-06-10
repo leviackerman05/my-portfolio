@@ -42,13 +42,7 @@ const Hero = () => {
         </p>
         <div className="flex flex-wrap items-center gap-3 mt-8 justify-center md:justify-start">
           <span className="btn-ember-resume-wrap">
-            <EmberButton
-              variant="primary"
-              href={profile.resumePdfUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-hero-action"
-            >
+            <EmberButton variant="primary" to={profile.resumeUrl} className="btn-hero-action">
               Resume
             </EmberButton>
           </span>

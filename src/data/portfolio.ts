@@ -81,7 +81,7 @@ export const profile = {
   tagline: 'Building scalable, secure, and high-performance web applications.',
   bio: `Software Engineer with 5 years of experience building scalable, secure, and high-performance web applications. Skilled in modern frontend and backend development, API-driven architectures, and improving system reliability. Experienced in leading cross-functional initiatives and delivering impactful solutions using React, Next.js, Vue, Node.js, and GraphQL.`,
   shortBio: `I build the API, break it, fix it, and ship the UI that makes it look intentional.`,
-  resumeUrl: '/resume.pdf',
+  resumeUrl: '/resume',
   resumePdfUrl: '/resume.pdf',
 };
 
